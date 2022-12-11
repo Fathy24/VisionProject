@@ -16,5 +16,5 @@ when activating debugger mode it will automatically take images instantly when r
 
 t he rover will keep moving automatically in autonmous mode and locating rocks:
 ![image](https://user-images.githubusercontent.com/93041833/206930205-a1461aeb-8844-4e21-bd10-8d65fb1f7456.png)
-![image](https://user-images.githubusercontent.com/93041833/206930265-5db379d8-0bcf-410a-ba17-5ac4cd8d7098.png)
+![image](https://user-images.githubusercontent.com/93041833/206932298-18608daf-ecb7-4f00-9320-6579fa16bb27.png)
  ---
