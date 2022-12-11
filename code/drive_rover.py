@@ -23,6 +23,13 @@ from decision import decision_step
 from supporting_functions import update_rover, create_output_images
 # Initialize socketio server and Flask application 
 # (learn more at: https://python-socketio.readthedocs.io/en/latest/)
+
+if(input("Start debugging? (y/n)") == "y"):
+    debug = True
+else:
+    debug = False
+
+    
 sio = socketio.Server()
 app = Flask(__name__)
 
