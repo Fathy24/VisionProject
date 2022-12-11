@@ -23,13 +23,12 @@ from decision import decision_step
 from supporting_functions import update_rover, create_output_images
 # Initialize socketio server and Flask application 
 # (learn more at: https://python-socketio.readthedocs.io/en/latest/)
-
 if(input("Start debugging? (y/n)") == "y"):
     debug = True
 else:
     debug = False
 
-    
+
 sio = socketio.Server()
 app = Flask(__name__)
 
@@ -116,7 +115,7 @@ def telemetry(sid, data):
         if np.isfinite(Rover.vel):
 
             # Execute the perception and decision steps to update the Rover's state
-            Rover = perception_step(Rover)
+            Rover = perception_step(Rover,debug)
             Rover = decision_step(Rover)
 
             # Create output images to send to server

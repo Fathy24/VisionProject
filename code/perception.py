@@ -13,7 +13,35 @@ def color_thresh(img, rgb_thresh=(160, 160, 160)):
                 & (img[:,:,1] > rgb_thresh[1]) \
                 & (img[:,:,2] > rgb_thresh[2])
     # Index the array of zeros with the boolean array and set to 1
-    color_select[above_thresh] = 1
+    color_select[above_thresh] = 150
+    # Return the binary image
+    return color_select
+
+def color_thresh_obstacles(img, rgb_thresh=(115, 115, 115)):
+    # Create an array of zeros same xy size as img, but single channel
+    color_select = np.zeros_like(img[:,:,0])
+    # Require that each pixel be above all three threshold values in RGB
+    # above_thresh will now contain a boolean array with "True"
+    # where threshold was met
+    above_thresh = (img[:,:,0] < rgb_thresh[0]) \
+                & (img[:,:,1] < rgb_thresh[1]) \
+                & (img[:,:,2] < rgb_thresh[2])
+    # Index the array of zeros with the boolean array and set to 1
+    color_select[above_thresh] = 150
+    # Return the binary image
+    return color_select
+
+def color_thresh_rock(img, rgb_thresh=(100, 100, 20)):
+    # Create an array of zeros same xy size as img, but single channel
+    color_select = np.zeros_like(img[:,:,0])
+    # Require that each pixel be above all three threshold values in RGB
+    # above_thresh will now contain a boolean array with "True"
+    # where threshold was met
+    above_thresh = (img[:,:,0] > rgb_thresh[0]) \
+                & (img[:,:,1] > rgb_thresh[1]) \
+                & (img[:,:,2] < rgb_thresh[2])
+    # Index the array of zeros with the boolean array and set to 1
+    color_select[above_thresh] = 150
     # Return the binary image
     return color_select
 
@@ -156,6 +184,5 @@ def perception_step(Rover, debug):
 
     Rover.nav_dists = dist
     Rover.nav_angles = angle
-    
     
     return Rover
