@@ -103,7 +103,80 @@ def perception_step(Rover):
         # Rover.nav_dists = rover_centric_pixel_distances
         # Rover.nav_angles = rover_centric_angles
     
- 
+    image = Rover.img
+    dst_size = 5 
+    bottom_offset = 6
+    source = np.float32([[14, 140], [301 ,140],[200, 96], [118, 96]])
+    destination = np.float32([[image.shape[1]/2 - dst_size, image.shape[0] - bottom_offset],
+                      [image.shape[1]/2 + dst_size, image.shape[0] - bottom_offset],
+                      [image.shape[1]/2 + dst_size, image.shape[0] - 2*dst_size - bottom_offset], 
+                      [image.shape[1]/2 - dst_size, image.shape[0] - 2*dst_size - bottom_offset],
+                      ])
+    #assigning bird eye view 
+    warped = perspect_transform(image, source, destination)
+
+    mask = perspect_transform(np.ones_like(image)*255, source, destination)
+    mask[0:60,:] = 0
+    mask[:,0:50] = 0
+    mask[:,270:] = 0
+
+
+    rock_mask = np.copy(mask)
+    rock_mask[0:110,:] = 0
+
+    #setting threshhold to obstacles    
+    obstacles = color_thresh(~warped & mask)
+    kernel = np.ones((5,5),np.uint8)
+    obstacles = cv2.dilate(obstacles,kernel,iterations = 2)
+
+    #viweong rocks
+    rock_warped = perspect_transform(image, source, destination)
+    
+    #setting threshhold of the road
+    road = color_thresh(warped & mask)
+    kernel = np.ones((3,5),np.uint8)
+    road = cv2.erode(road,kernel,iterations = 3)
+
+    #identifying rocks
+    rocks = color_thresh(rock_warped)
+
+    #coloring channels in rover camera
+    Rover.vision_image[:,:,2] = road * 255
+    Rover.vision_image[:,:,0] = obstacles * 255
+
+    #identifying the pixles of the road
+    road_xpix, road_ypix = rover_coords(road)  
+    #identifying the pixles of the obstacles
+    obs_xpix, obs_ypix = rover_coords(obstacles)    
+    #identifying the pixles of the rocks
+    rock_xpix, rock_ypix = rover_coords(rocks)
+    
+    #adjusting map scale
+    scale = 10
+    worldsize = 200
+    xpos = Rover.pos[0]
+    ypos = Rover.pos[1]
+    yaw =  Rover.yaw
+    
+    #mapping pixels to road real world
+    road_world_x,road_world_y, = pix_to_world(road_xpix, road_ypix, xpos,ypos ,yaw, worldsize, scale) 
+    #mapping pixels to obtacles real world
+    obs_world_x,obs_world_y, = pix_to_world(obs_xpix, obs_ypix, xpos,ypos ,yaw, worldsize, scale) 
+    #mapping pixels to rock real world
+    rock_world_x, rock_world_y = pix_to_world(rock_xpix, rock_ypix, xpos,ypos ,yaw, worldsize, scale)
+
+    #coloring channels in world map
+    Rover.worldmap[road_world_y,road_world_x,2] = 255
+    Rover.worldmap[obs_world_y,obs_world_x,0] = 255
+    Rover.worldmap[rock_world_y, rock_world_x,1] = 255
+    
+    #clear road
+    is_road = Rover.worldmap[:,:,2] > 0
+    Rover.worldmap[is_road,0] = 0
+    #convertingto polar coordinates
+    distance, angles = to_polar_coords(road_xpix, road_ypix)
+    #assingning rover angles to the angles from polar coordinates
+    Rover.nav_angles = angles   
     
     
     return Rover
