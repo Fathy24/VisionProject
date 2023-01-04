@@ -23,11 +23,11 @@ from decision import decision_step
 from supporting_functions import update_rover, create_output_images
 # Initialize socketio server and Flask application 
 # (learn more at: https://python-socketio.readthedocs.io/en/latest/)
+
 if(input("Start debugging? (y/n)") == "y"):
     debug = True
 else:
     debug = False
-
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -65,9 +65,9 @@ class RoverState():
         # of navigable terrain pixels.  This is a very crude form of knowing
         # when you can keep going and when you should stop.  Feel free to
         # get creative in adding new fields or modifying these!
-        self.stop_forward = 50 # Threshold to initiate stopping
-        self.go_forward = 500 # Threshold to go forward again
-        self.max_vel = 2 # Maximum velocity (meters/second)
+        self.stop_forward = 100 # Threshold to initiate stopping
+        self.go_forward = 250 # Threshold to go forward again
+        self.max_vel = 1.75 # Maximum velocity (meters/second)
         # Image output from perception step
         # Update this image to display your intermediate analysis steps
         # on screen in autonomous mode
@@ -78,8 +78,7 @@ class RoverState():
         self.worldmap = np.zeros((200, 200, 3), dtype=np.float) 
         self.samples_pos = None # To store the actual sample positions
         self.samples_to_find = 0 # To store the initial count of samples
-        self.samples_located = 0 # To store number of samples located on map
-        self.samples_collected = 0 # To count the number of samples collected
+        self.samples_found = 0 # To count the number of samples found
         self.near_sample = 0 # Will be set to telemetry value data["near_sample"]
         self.picking_up = 0 # Will be set to telemetry value data["picking_up"]
         self.send_pickup = False # Set to True to trigger rock pickup
@@ -122,21 +121,14 @@ def telemetry(sid, data):
             out_image_string1, out_image_string2 = create_output_images(Rover)
 
             # The action step!  Send commands to the rover!
+            commands = (Rover.throttle, Rover.brake, Rover.steer)
+            send_control(commands, out_image_string1, out_image_string2)
  
-            # Don't send both of these, they both trigger the simulator
-            # to send back new telemetry so we must only send one
-            # back in respose to the current telemetry data.
-
             # If in a state where want to pickup a rock send pickup command
             if Rover.send_pickup and not Rover.picking_up:
                 send_pickup()
                 # Reset Rover flags
                 Rover.send_pickup = False
-            else:
-                # Send commands to the rover!
-                commands = (Rover.throttle, Rover.brake, Rover.steer)
-                send_control(commands, out_image_string1, out_image_string2)
-
         # In case of invalid telemetry, send null commands
         else:
 
