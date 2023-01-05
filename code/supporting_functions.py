@@ -49,7 +49,7 @@ def update_rover(Rover, data):
       Rover.picking_up = np.int(data["picking_up"])
       # Update number of rocks collected
       Rover.samples_collected = Rover.samples_to_find - np.int(data["sample_count"])
-
+      
       # print('speed =',Rover.vel, 'position =', Rover.pos, 'throttle =',
       # Rover.throttle, 'steer_angle =', Rover.steer, 'near_sample:', Rover.near_sample,
       # 'picking_up:', data["picking_up"], 'sending pickup:', Rover.send_pickup,
@@ -65,7 +65,7 @@ def update_rover(Rover, data):
 
 # Define a function to create display output given worldmap results
 def create_output_images(Rover):
-
+      
       # Create a scaled map for plotting and clean up obs/nav pixels a bit
       if np.max(Rover.worldmap[:,:,2]) > 0:
             nav_pix = Rover.worldmap[:,:,2] > 0
@@ -126,6 +126,7 @@ def create_output_images(Rover):
       else:
             fidelity = 0
       # Flip the map for plotting so that the y-axis points upward in the display
+      Rover.MapPercent = perc_mapped
       map_add = np.flipud(map_add).astype(np.float32)
       # Add some text about map and rock sample detection results
       cv2.putText(map_add,"Time: "+str(np.round(Rover.total_time, 1))+' s', (0, 10), 

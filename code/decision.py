@@ -25,9 +25,10 @@ def decision_step(Rover):
             Rover.brake = Rover.brake_set
 
     elif Rover.rock_angles is not None and len(Rover.rock_angles) > 1:
-        Rover.throttle = 0.05
+        Rover.throttle = 0.3
         # Set steering to average angle clipped to the range +/- 15
-        Rover.steer = np.clip(np.mean(Rover.rock_angles * 180 / np.pi), -15, 15)  ## changed
+        Rover.steer = np.clip(np.mean(Rover.rock_angles * 180 / np.pi), -15, 15) ## changed
+        Rover.AngleMemory = Rover.steer
 
     elif Rover.nav_angles is not None:
 
@@ -84,22 +85,31 @@ def decision_step(Rover):
                     # Release the brake to allow turning
                     Rover.brake = 0
                     # Turn range is +/- 15 degrees, when stopped the next line will induce 4-wheel turning
-                    Rover.steer = -4 ## changed # Could be more clever here about which way to turn
+                    if Rover.AngleMemory != 0:
+                        Rover.steer = -150 * Rover.AngleMemory ## changed # Could be more clever here about which way to turn
+                    #Rover.steer = -4
+                    else:
+                        Rover.steer = -15
                 # If we're stopped but see sufficient navigable terrain in front then go!
                 if len(Rover.nav_angles) >= Rover.go_forward:
                     # Set throttle back to stored value
                     Rover.throttle = Rover.throttle_set
                     # Release the brake
                     Rover.brake = 0
+                    if Rover.AngleMemory != 0:
+                        Rover.steer = -150 * Rover.AngleMemory ## changed # Could be more clever here about which way to turn
+                    #Rover.steer = -4
+                    else:
+                        Rover.steer = -15
                     # Set steer to mean angle
-                    Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi), -15, 15) 
-                    Rover.mode = 'forward'
+                    #Rover.steer = np.clip(np.mean(Rover.nav_angles * 180/np.pi), -15, 15) 
+                    Rover.mode = 'forward'     
 
         elif Rover.mode == 'stuck':
             print('STUCK MODE')
             Rover.brake = 0
             Rover.throttle = 0
-            #Rover.steer = -15 ##15
+            #Rover.steer = -15 
             Rover.mode = 'forward'
 
         elif Rover.mode == 'collecting':
