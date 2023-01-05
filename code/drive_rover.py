@@ -124,7 +124,7 @@ def telemetry(sid, data):
             Rover = perception_step(Rover,debug)
             Rover = decision_step(Rover)
             if Rover.MapPercent >= 95 and Rover.samples_collected >=5 :
-                if (Rover.pos[1] -2 < Rover.StartPos[1] < Rover.pos[1]+ 2 ) and (Rover.pos[0] -2 < Rover.StartPos[0] < Rover.pos[0]+ 2 ) : 
+                if (Rover.pos[1] -5 < Rover.StartPos[1] < Rover.pos[1]+ 5 ) and (Rover.pos[0] -5 < Rover.StartPos[0] < Rover.pos[0]+ 5 ) : 
                     Rover.brake =10
                     Rover.throttle = 0
                     Rover.steer = 0
