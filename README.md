@@ -47,4 +47,4 @@ results are different for different simulator resolutions
 <img width="606" alt="Screen Shot 2023-01-05 at 12 52 52 AM" src="https://user-images.githubusercontent.com/66957026/210680656-3a60d8b4-21c3-4b40-b786-abf26d81152a.png">
 
 
-
+video of run: https://drive.google.com/drive/folders/1DqhUCZuHyJ-yrPvJBji1jTuYNpYoEg-Z?usp=share_link
