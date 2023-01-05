@@ -13,6 +13,8 @@ In this stage, build upon your previous implementation to map at least 95% of th
 # Dependencies to download
 ![image](https://user-images.githubusercontent.com/66957026/210679923-04a1a078-b041-401e-9430-46c011c5dd1d.png)
 
+
+# How to Use
 open repo:
 ![image](https://user-images.githubusercontent.com/93041833/206929367-7125ca55-00a8-49d2-8b1d-9f7b72c53ffb.png)
 
