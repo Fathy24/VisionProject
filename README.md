@@ -7,10 +7,26 @@ following a program review. In this project, we’ll do computer vision for robo
 ## Phase 1-Basic Functionality
 The inset image at the bottom right when you're running in autonomous mode is packed with information. In this image, your map of navigable terrain, obstacles and rock sample locations is overplotted with the ground truth map. In addition, some overall statistics are presented ncluding total time, percent of the world you have mapped, the fidelity (accuracy) of your map, and the number of rocks you have located (mapped) and how many you have collected. The requirement for a passing submission of the first phase is to map at least 40% of the environment at 60% fidelity and locate at least one of the rock samples (note: you're not required to collect any rocks, just map the location of at least 1). Each time you launch the simulator in autonomous mode there will be 6 rock samples scattered randomly about the environment and your rover will start at random orientation in the middle of the map.
 
- starting the code:
+## Phase 2-Collect and Return
+In this stage, build upon your previous implementation to map at least 95% of the environment at 85% fidelity. All while colliding with the least number of obstacles. (The maximum number of collisions allowed will be announced at the beginning of phase 2) Also, there is a robotic arm located on the vehicle. In this phase, you should also locate and use the robotics arm to pick up at least five rocks out of the six, and then return them back to the start position.
+
+# Dependencies to download
+1.	NumPy
+2.	OpenCV
+3.	Eventlet
+4.	Pillow
+5.	Matplotlib
+6.	SciPy
+7.	Imageio
+8.	Flask
+9.	Socketio==4.6.1
+10.	Engineio==3.13.2
+![image](https://user-images.githubusercontent.com/66957026/210679923-04a1a078-b041-401e-9430-46c011c5dd1d.png)
+
+open repo:
 ![image](https://user-images.githubusercontent.com/93041833/206929367-7125ca55-00a8-49d2-8b1d-9f7b72c53ffb.png)
 
- then inside code file
+open the file named code
 ![image](https://user-images.githubusercontent.com/93041833/206929394-8fc2078f-c8bf-49ce-94f1-5f7d9b7de460.png)
 
  right click then open in terminal 
@@ -21,7 +37,7 @@ The inset image at the bottom right when you're running in autonomous mode is pa
 when activating debugger mode it will automatically take images instantly when rover is moving and put them simultaneously in the dubugger folder insid code folder:
 ![image](https://user-images.githubusercontent.com/93041833/206930014-6651008d-8193-4b7a-a96b-47fd4c503355.png)
 
-t he rover will keep moving automatically in autonmous mode and locating rocks:
+the rover will keep moving automatically in autonmous mode and locating rocks:
 ![image](https://user-images.githubusercontent.com/93041833/206930205-a1461aeb-8844-4e21-bd10-8d65fb1f7456.png)
 ![image](https://user-images.githubusercontent.com/93041833/206932298-18608daf-ecb7-4f00-9320-6579fa16bb27.png)
  ---
