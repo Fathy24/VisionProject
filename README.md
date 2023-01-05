@@ -11,16 +11,6 @@ The inset image at the bottom right when you're running in autonomous mode is pa
 In this stage, build upon your previous implementation to map at least 95% of the environment at 85% fidelity. All while colliding with the least number of obstacles. (The maximum number of collisions allowed will be announced at the beginning of phase 2) Also, there is a robotic arm located on the vehicle. In this phase, you should also locate and use the robotics arm to pick up at least five rocks out of the six, and then return them back to the start position.
 
 # Dependencies to download
-1.	NumPy
-2.	OpenCV
-3.	Eventlet
-4.	Pillow
-5.	Matplotlib
-6.	SciPy
-7.	Imageio
-8.	Flask
-9.	Socketio==4.6.1
-10.	Engineio==3.13.2
 ![image](https://user-images.githubusercontent.com/66957026/210679923-04a1a078-b041-401e-9430-46c011c5dd1d.png)
 
 open repo:
