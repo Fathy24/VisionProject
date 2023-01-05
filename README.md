@@ -19,18 +19,26 @@ open repo:
 open the file named code
 ![image](https://user-images.githubusercontent.com/93041833/206929394-8fc2078f-c8bf-49ce-94f1-5f7d9b7de460.png)
 
- right click then open in terminal 
+right click then open in terminal
 ![image](https://user-images.githubusercontent.com/93041833/206929513-3090a169-6cfc-438c-be71-31ca3e2d1903.png)
 
- then type "y" to activate debugger mode
+then type "y" to activate debugger mode
 ![image](https://user-images.githubusercontent.com/93041833/206929592-77b3ecf2-9a52-444a-af1d-79d7aed62683.png)
+
 when activating debugger mode it will automatically take images instantly when rover is moving and put them simultaneously in the dubugger folder insid code folder:
 ![image](https://user-images.githubusercontent.com/93041833/206930014-6651008d-8193-4b7a-a96b-47fd4c503355.png)
 
 the rover will keep moving automatically in autonmous mode and locating rocks:
 ![image](https://user-images.githubusercontent.com/93041833/206930205-a1461aeb-8844-4e21-bd10-8d65fb1f7456.png)
-![image](https://user-images.githubusercontent.com/93041833/206932298-18608daf-ecb7-4f00-9320-6579fa16bb27.png)
- ---
+
+test results 
+<img width="489" alt="Screen Shot 2023-01-05 at 3 23 38 AM" src="https://user-images.githubusercontent.com/66957026/210680573-d09903f2-10b9-48f0-939a-8c0095674e17.png">
+
+<img width="605" alt="Screen Shot 2023-01-05 at 2 34 40 AM" src="https://user-images.githubusercontent.com/66957026/210680624-352aad53-3f86-4d39-8528-c2c8f8743f21.png">
+
+<img width="601" alt="Screen Shot 2023-01-05 at 2 34 20 AM" src="https://user-images.githubusercontent.com/66957026/210680646-f9a47141-6a0b-4e2a-a411-4d124a46090d.png">
+
+<img width="606" alt="Screen Shot 2023-01-05 at 12 52 52 AM" src="https://user-images.githubusercontent.com/66957026/210680656-3a60d8b4-21c3-4b40-b786-abf26d81152a.png">
 
 
 
